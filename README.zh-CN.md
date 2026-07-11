@@ -61,6 +61,7 @@ Web 页面、CSV、Markdown 报告、图表
 - [本地部署说明](docs/local_deployment.md)
 - [Web 演示说明](docs/demo_guide.md)
 - [正式项目报告](docs/project_report.md)
+- [100 只真实基金样本验证](docs/real_world_validation.md)
 
 ## 分析流程
 
@@ -279,6 +280,22 @@ cd ~/fund-ranking-system
 - `decision_label`：重点观察、可观察、高回撤预警、暂不优先
 - `decision_reason`：系统给出该标签的历史指标原因
 - `result_explanation`：自然语言解释
+
+## 100 只真实样本验证
+
+项目已完成一次 100 只真实股票型 / 混合型基金候选池测试。经过基金池准入后，55 只基金纳入分析。
+
+Walk-Forward 样本外验证结果：
+
+| Portfolio | Annual Return | Sharpe | Volatility | Max Drawdown | Win Rate |
+|---|---:|---:|---:|---:|---:|
+| Top 10 | -2.29% | -0.11 | 21.59% | -33.51% | 47.2% |
+| Top 20% | -3.26% | -0.15 | 21.35% | -35.33% | 47.6% |
+| All Funds | -5.51% | -0.25 | 21.94% | -39.77% | 45.4% |
+
+该结果说明：在这组真实样本和参数设定下，模型 Top 组合相对全基金等权组合表现出更好的风险收益特征。但它不证明模型可以预测未来收益，也不构成投资建议。
+
+详细结果见：[100 只真实基金样本验证](docs/real_world_validation.md)。
 
 ## 使用自己的数据
 

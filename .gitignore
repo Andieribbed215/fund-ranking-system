@@ -13,11 +13,11 @@ __pycache__/
 src/*.egg-info/
 *.docx
 
-data/raw/*.csv
-data/processed/*.csv
+data/raw/**/*.csv
+data/processed/**/*.csv
 data/raw/web/
 data/processed/web/
-reports/*.csv
-reports/*.png
-reports/*.md
+reports/**/*.csv
+reports/**/*.png
+reports/**/*.md
 reports/web/

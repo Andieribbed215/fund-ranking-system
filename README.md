@@ -2,7 +2,7 @@
 
 A local-deployable mutual fund risk-return analysis system with FastAPI, AkShare, SQLite cache, multi-factor scoring, charts, and report generation.
 
-[中文说明](README.zh-CN.md) · [Local Deployment](docs/local_deployment.md) · [Demo Guide](docs/demo_guide.md) · [Project Report](docs/project_report.md)
+[中文说明](README.zh-CN.md) · [Local Deployment](docs/local_deployment.md) · [Demo Guide](docs/demo_guide.md) · [Project Report](docs/project_report.md) · [100-Fund Validation](docs/real_world_validation.md)
 
 > This project is for historical performance analysis and research assistance only. It is not personalized investment advice, a return guarantee, or a buy/sell signal.
 
@@ -203,6 +203,18 @@ lookback window
 ```
 
 This does not claim that the model predicts future returns. It checks whether historical risk-return scores have out-of-sample differentiation ability.
+
+### 100-Fund Real Sample Result
+
+A real-data experiment with 100 stock/hybrid mutual fund candidates was run with the `balanced` profile. After universe filtering, 55 funds were eligible for analysis.
+
+| Portfolio | Annual Return | Sharpe | Volatility | Max Drawdown | Win Rate |
+|---|---:|---:|---:|---:|---:|
+| Top 10 | -2.29% | -0.11 | 21.59% | -33.51% | 47.2% |
+| Top 20% | -3.26% | -0.15 | 21.35% | -35.33% | 47.6% |
+| All Funds | -5.51% | -0.25 | 21.94% | -39.77% | 45.4% |
+
+In this sample, the top-ranked portfolios still had negative returns, but they showed better return, Sharpe, drawdown, and win-rate characteristics than the all-fund equal-weight portfolio. See [100-Fund Validation](docs/real_world_validation.md).
 
 ## Test
 

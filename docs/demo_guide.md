@@ -3,7 +3,7 @@
 ## 1. 启动系统
 
 ```bash
-cd /Users/zhuozijie/Desktop/实习
+cd ~/fund-ranking-system
 .venv/bin/fund-ranking-web --host 127.0.0.1 --port 8000
 ```
 
@@ -112,7 +112,7 @@ balanced
 
 - 主分析报告
 - 权重敏感性报告
-- P3 研究增强报告
+- 研究报告
 - 当前画像排名 CSV
 - 全部画像排名 CSV
 - 指标明细 CSV

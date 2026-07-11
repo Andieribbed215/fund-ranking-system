@@ -20,7 +20,7 @@ TEXT_KEYWORDS = {
 
 
 def build_research_enhancement(scored: pd.DataFrame, reports_dir: str | Path) -> tuple[Path, Path]:
-    """Create a lightweight P3 research report with text factors and model explanation."""
+    """Create a lightweight research report with text factors and model explanation."""
     reports_dir = Path(reports_dir)
     research = scored.copy()
     if "fund_name" not in research.columns:
@@ -29,8 +29,8 @@ def build_research_enhancement(scored: pd.DataFrame, reports_dir: str | Path) ->
     research["future_score_proxy"] = _future_score_proxy(research)
     explanation = _linear_explanation(research)
 
-    csv_path = reports_dir / "p3_research_enhancement.csv"
-    md_path = reports_dir / "p3_research_enhancement.md"
+    csv_path = reports_dir / "research_enhancement.csv"
+    md_path = reports_dir / "research_enhancement.md"
     research[
         [
             "fund_name",
@@ -101,11 +101,11 @@ def _research_markdown(explanation: pd.DataFrame) -> str:
         f"| {row.feature} | {row.coefficient:.4f} | {row.abs_importance:.4f} |"
         for row in explanation.itertuples(index=False)
     )
-    return f"""# P3 研究增强报告
+    return f"""# 研究报告
 
 ## 定位
 
-本报告是研究增强雏形，不构成真实收益预测模型。`future_score_proxy` 是基于历史指标构造的代理目标，用于演示如何把量化指标、文本因子和可解释模型接入项目。
+本报告不构成真实收益预测模型。`future_score_proxy` 是基于历史指标构造的代理目标，用于演示如何把量化指标、文本因子和可解释模型接入项目。
 
 ## 文本因子
 
@@ -119,7 +119,4 @@ def _research_markdown(explanation: pd.DataFrame) -> str:
 |---|---:|---:|
 {rows}
 
-## 后续升级
-
-后续可以把基金季报、基金经理观点和持仓信息接入，用 TF-IDF、BERT 或情感词典形成真实文本因子，再使用 Random Forest、XGBoost 和 SHAP 做更完整的可解释分析。
 """

@@ -639,7 +639,7 @@ def _download_section(profile: str, run_id: int | None) -> str:
     files = [
         ("主分析报告", f"{report_base}/fund_analysis_report.md"),
         ("权重敏感性报告", f"{report_base}/weight_sensitivity.md"),
-        ("P3 研究报告", f"{report_base}/p3_research_enhancement.md"),
+        ("研究报告", f"{report_base}/research_enhancement.md"),
         ("当前画像排名 CSV", f"{report_base}/ranking_{profile}.csv"),
         ("全部画像排名 CSV", f"{processed_base}/ranking_all_profiles.csv"),
         ("指标明细 CSV", f"{processed_base}/fund_metrics.csv"),

@@ -20,7 +20,7 @@
 | Web 分析台 | 输入代码即可分析，支持搜索、基金池、下载 |
 | SQLite 缓存 | 保存净值、基金名称、基金池和分析历史 |
 | 独立结果页 | 每次分析保留独立报告，不被新结果覆盖 |
-| P3 研究增强 | 生成轻量文本因子和可解释模型雏形 |
+| 研究报告 | 生成轻量文本因子和可解释模型说明 |
 
 ## 页面预览
 
@@ -41,7 +41,7 @@ SQLite 本地缓存
       ↓
 多因子评分和画像排名
       ↓
-风险等级、敏感性分析、P3 研究增强
+风险等级、敏感性分析、研究报告
       ↓
 Web 页面、CSV、Markdown 报告、图表
 ```
@@ -51,13 +51,10 @@ Web 页面、CSV、Markdown 报告、图表
 - [本地部署说明](docs/local_deployment.md)
 - [Web 演示说明](docs/demo_guide.md)
 - [正式项目报告](docs/project_report.md)
-- [P0-P3 上线化计划](docs/production_plan.md)
 
-## 项目路线
+## 分析流程
 
-### Phase 1：复现基础版
-
-先跑通完整数据分析闭环：
+系统会执行完整的数据分析闭环：
 
 ```text
 基金净值数据
@@ -68,9 +65,7 @@ Web 页面、CSV、Markdown 报告、图表
   -> 可视化图表
 ```
 
-### Phase 2：改造成研究项目
-
-加入多因子评分模型和权重敏感性分析：
+多因子评分模型：
 
 ```text
 Fund Score =
@@ -90,14 +85,6 @@ w1 * Annual Return
 | balanced | 平衡收益、回撤、风险调整收益和稳定性 |
 | conservative | 更看重最大回撤、波动控制和持有体验 |
 
-### Phase 3：后续升级方向
-
-- 接入真实基金数据：Tushare、AkShare、天天基金公开数据
-- 加入基金季报、公告、基金经理观点等文本信息
-- 使用 TF-IDF、情感词典或 BERT 构建文本情绪指标
-- 使用 Random Forest、XGBoost 预测未来区间表现
-- 使用 SHAP 做可解释性分析，衔接金融科技和 XAI 方向
-
 ## 项目结构
 
 ```text
@@ -108,8 +95,7 @@ Fund-Ranking-System
 ├── docs
 │   ├── demo_guide.md
 │   ├── local_deployment.md
-│   ├── project_report.md
-│   └── production_plan.md
+│   └── project_report.md
 ├── reports
 ├── src
 │   └── fund_ranking_system
@@ -159,7 +145,7 @@ http://127.0.0.1:8000
 ### 命令行 demo
 
 ```bash
-cd /Users/zhuozijie/Desktop/实习
+cd ~/fund-ranking-system
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -e . pytest
@@ -177,7 +163,7 @@ fund-ranking --demo --profile balanced
 本项目提供本地 Web 版，适合实际演示和日常查询。启动后可以在页面输入基金代码、起始日期和投资者画像，系统会自动抓取真实净值数据并生成排名、图表和报告。
 
 ```bash
-cd /Users/zhuozijie/Desktop/实习
+cd ~/fund-ranking-system
 .venv/bin/fund-ranking-web --host 127.0.0.1 --port 8000
 ```
 
@@ -202,7 +188,7 @@ Web 页面支持：
 - 支持自定义基金池保存和删除
 - 显示本地缓存的最早日期、最新日期和数据条数
 - 每次分析生成独立报告目录，历史报告不会被新结果覆盖
-- 自动生成 P3 研究增强报告，包含轻量文本因子和可解释模型雏形
+- 自动生成研究报告，包含轻量文本因子和可解释模型说明
 
 ## 本地数据库与自动更新
 
@@ -227,7 +213,7 @@ data/fund_ranking.db
 也可以手动更新数据库中已有基金：
 
 ```bash
-cd /Users/zhuozijie/Desktop/实习
+cd ~/fund-ranking-system
 .venv/bin/python scripts/update_fund_data.py --start-date 2021-01-01
 ```
 

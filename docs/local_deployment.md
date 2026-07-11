@@ -59,7 +59,34 @@ python3 -m venv .venv
 .venv/bin/fund-ranking-web --host 127.0.0.1 --port 8000
 ```
 
-## 5. 配置文件
+## 5. Docker 启动
+
+如果本机已经安装 Docker，可以使用：
+
+```bash
+docker compose up --build
+```
+
+启动成功后打开：
+
+```text
+http://127.0.0.1:8000
+```
+
+Docker 会把运行产物保存在本地目录：
+
+```text
+data/
+reports/
+```
+
+停止服务：
+
+```bash
+docker compose down
+```
+
+## 6. 配置文件
 
 可以复制示例配置：
 
@@ -83,7 +110,7 @@ FUND_RANKING_HOST=127.0.0.1
 
 这表示服务只允许本机访问，避免暴露到公网。
 
-## 6. 运行测试
+## 7. 运行测试
 
 ```bash
 .venv/bin/python -m pytest -q
@@ -95,7 +122,7 @@ Windows：
 .venv\Scripts\python -m pytest -q
 ```
 
-## 7. 命令行运行
+## 8. 命令行运行
 
 生成 demo 数据并分析：
 
@@ -112,7 +139,7 @@ Windows：
   --profile balanced
 ```
 
-## 8. 本地生成文件
+## 9. 本地生成文件
 
 运行后会在本地生成：
 
@@ -128,7 +155,7 @@ reports/web/
 
 这些文件是本地运行产物，已经在 `.gitignore` 中忽略，不需要上传 GitHub。
 
-## 9. 安全说明
+## 10. 安全说明
 
 本项目默认是本地应用：
 
@@ -140,7 +167,7 @@ reports/web/
 
 不要将本项目默认配置直接作为公网服务开放。如果需要公网部署，需要额外增加登录认证、限流、日志、HTTPS、任务队列和合规审核。
 
-## 10. 常见问题
+## 11. 常见问题
 
 ### 依赖安装慢
 

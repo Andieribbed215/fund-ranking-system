@@ -1,0 +1,15 @@
+name: fund-ranking-system
+
+services:
+  fund-ranking-system:
+    build: .
+    container_name: fund-ranking-system
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./reports:/app/reports
+    environment:
+      FUND_RANKING_HOST: 0.0.0.0
+      FUND_RANKING_PORT: 8000
+    restart: unless-stopped

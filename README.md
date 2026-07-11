@@ -1,10 +1,27 @@
 # Fund Ranking System
 
-A local-deployable mutual fund risk-return analysis system with FastAPI, AkShare, SQLite cache, multi-factor scoring, charts, and report generation.
+![CI](https://github.com/ZZJ1977/fund-ranking-system/actions/workflows/ci.yml/badge.svg)
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-Web%20Dashboard-009688)
+![AkShare](https://img.shields.io/badge/Data-AkShare-orange)
+![Docker](https://img.shields.io/badge/Docker-Ready-2496ED)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-[中文说明](README.zh-CN.md) · [Local Deployment](docs/local_deployment.md) · [Demo Guide](docs/demo_guide.md) · [Project Report](docs/project_report.md) · [100-Fund Validation](docs/real_world_validation.md)
+A local-first mutual fund risk-return analysis system for China's public fund market. It fetches real NAV data through AkShare, caches it in SQLite, ranks funds with a transparent multi-factor model, and generates charts, CSV files, and Markdown reports.
+
+[中文说明](README.zh-CN.md) · [Local Deployment](docs/local_deployment.md) · [Demo Guide](docs/demo_guide.md) · [Project Report](docs/project_report.md) · [100-Fund Validation](docs/real_world_validation.md) · [Contributing](CONTRIBUTING.md)
 
 > This project is for historical performance analysis and research assistance only. It is not personalized investment advice, a return guarantee, or a buy/sell signal.
+
+## What You Get
+
+- A usable FastAPI web dashboard, not just a notebook.
+- Real public fund NAV fetching with local SQLite caching.
+- Multi-factor scoring across return, volatility, drawdown, Sharpe, Calmar, and rolling stability.
+- Three investor profiles: `aggressive`, `balanced`, and `conservative`.
+- Explainable rankings with risk labels, data-quality warnings, and natural-language reasons.
+- Walk-forward validation, factor diagnostics, factor contribution analysis, and weight robustness checks.
+- Docker and Windows/macOS/Linux local deployment instructions.
 
 ## Preview
 
@@ -52,7 +69,7 @@ It is designed as a small but complete financial data application rather than a 
 
 ## Quick Start
 
-### Option 1: Local Python
+### Option 1: macOS / Linux
 
 ```bash
 git clone https://github.com/ZZJ1977/fund-ranking-system.git
@@ -69,10 +86,27 @@ http://127.0.0.1:8000
 Try these fund codes:
 
 ```text
-000001 000011 000083
+000001 000011 000083 110022 005827
 ```
 
-### Option 2: Docker
+### Option 2: Windows PowerShell
+
+```powershell
+git clone https://github.com/ZZJ1977/fund-ranking-system.git
+cd fund-ranking-system
+py -3.11 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install --upgrade pip
+.\.venv\Scripts\python.exe -m pip install -e .
+.\.venv\Scripts\fund-ranking-web.exe --host 127.0.0.1 --port 8000
+```
+
+Open:
+
+```text
+http://127.0.0.1:8000
+```
+
+### Option 3: Docker
 
 ```bash
 git clone https://github.com/ZZJ1977/fund-ranking-system.git
@@ -91,6 +125,35 @@ The Docker container keeps generated data under mounted local folders:
 ```text
 data/
 reports/
+```
+
+## Real Fund Sample
+
+You can start with a diversified 30-fund sample covering active equity, hybrid, consumption, healthcare, technology, index-linked, LOF, and QDII funds:
+
+```text
+110022 005827 001938 003096 161725 270042 001052 519674 001714 000988
+002001 000991 519732 260108 163406 160222 162605 000248 001475 001410
+004851 005669 006327 007119 008086 009341 010347 011011 012414 013356
+```
+
+Fetch real NAV data and generate project-ready CSV files:
+
+```bash
+python scripts/fetch_akshare_funds.py \
+  --codes 110022 005827 001938 003096 161725 270042 001052 519674 001714 000988 002001 000991 519732 260108 163406 160222 162605 000248 001475 001410 004851 005669 006327 007119 008086 009341 010347 011011 012414 013356 \
+  --start-date 2021-01-01 \
+  --output data/raw/real_fund_nav.csv \
+  --metadata-output data/raw/fund_metadata.csv
+```
+
+Then run the ranking pipeline:
+
+```bash
+fund-ranking \
+  --input data/raw/real_fund_nav.csv \
+  --metadata data/raw/fund_metadata.csv \
+  --profile balanced
 ```
 
 ## Command Line Demo
@@ -216,6 +279,21 @@ A real-data experiment with 100 stock/hybrid mutual fund candidates was run with
 
 In this sample, the top-ranked portfolios still had negative returns, but they showed better return, Sharpe, drawdown, and win-rate characteristics than the all-fund equal-weight portfolio. See [100-Fund Validation](docs/real_world_validation.md).
 
+## Who This Is For
+
+- Students building a finance, data analysis, or fintech portfolio project.
+- Python learners who want a complete data pipeline instead of a single script.
+- Quant research beginners exploring fund ranking, risk metrics, and model validation.
+- Interview reviewers who want to see reproducible data fetching, analysis, storage, web UI, and reporting in one small project.
+
+## Roadmap
+
+- Add scheduled background updates for selected fund pools.
+- Add richer fund metadata, such as manager tenure, fee level, and fund size.
+- Add more formal backtesting controls and benchmark comparison.
+- Add optional user authentication before any public deployment.
+- Add CI checks for tests, formatting, and documentation links.
+
 ## Test
 
 ```bash
@@ -228,6 +306,7 @@ python -m pytest -q
 - The app does not upload local files.
 - The app only fetches public fund data through external data interfaces.
 - Do not expose the default local setup directly to the public internet without authentication, rate limiting, logging, HTTPS, and compliance review.
+- Generated rankings are research labels, not financial advice.
 
 ## License
 

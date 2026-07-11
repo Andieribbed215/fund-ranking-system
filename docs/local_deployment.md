@@ -37,12 +37,13 @@ bash scripts/run_web.sh
 open http://127.0.0.1:8000
 ```
 
-Windows 用户可以手动执行：
+Windows PowerShell 用户可以手动执行：
 
-```bash
-python -m venv .venv
-.venv\Scripts\python -m pip install -e .
-.venv\Scripts\fund-ranking-web --host 127.0.0.1 --port 8000
+```powershell
+py -3.11 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install --upgrade pip
+.\.venv\Scripts\python.exe -m pip install -e .
+.\.venv\Scripts\fund-ranking-web.exe --host 127.0.0.1 --port 8000
 ```
 
 然后在浏览器打开：
@@ -118,8 +119,8 @@ FUND_RANKING_HOST=127.0.0.1
 
 Windows：
 
-```bash
-.venv\Scripts\python -m pytest -q
+```powershell
+.\.venv\Scripts\python.exe -m pytest -q
 ```
 
 ## 8. 命令行运行

